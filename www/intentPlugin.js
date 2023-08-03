@@ -1,11 +1,25 @@
-var exec = require('cordova/exec');
+var exec = require("cordova/exec");
 
-function IntentPlugin() {
+function IntentPlugin() {}
 
-}
-
-IntentPlugin.prototype.startActivity = function (packageName,activitiName,bundle) {
-    exec(function (res) { }, function (err) { }, "IntentPlugin", "startActivity", [packageName,activitiName,bundle]);
-}
+IntentPlugin.prototype.startActivity = function ({
+  packageName,
+  activitiName,
+  bundle,
+  onSuccess,
+  onError,
+}) {
+  exec(
+    function (res) {
+      onSuccess(res);
+    },
+    function (err) {
+      onError(err);
+    },
+    "IntentPlugin",
+    "startActivity",
+    [packageName, activitiName, bundle]
+  );
+};
 
 module.exports = new IntentPlugin();
